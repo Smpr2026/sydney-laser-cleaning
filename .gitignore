@@ -1,0 +1,9 @@
+# images no longer used by the site (kept locally only)
+img/rust.jpg
+img/paint.jpg
+img/soot.jpg
+img/hero.jpg
+img/machine.jpg
+img/machine-ai-wrong.jpg
+img/real/machine.png
+.DS_Store
