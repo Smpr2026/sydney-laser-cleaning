@@ -521,3 +521,27 @@ footer .about{color:var(--muted);margin-top:16px;max-width:36ch;font-size:15px}
   .vfeat .vbg{-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 18%);mask-image:linear-gradient(90deg,transparent 0,#000 18%)}
   .vfeat.right .vbg{-webkit-mask-image:linear-gradient(270deg,transparent 0,#000 18%);mask-image:linear-gradient(270deg,transparent 0,#000 18%)}
 }
+
+/* ===== smooth scrolling: drop effects the browser has to redo on every video frame ===== */
+/* hero clips: no live blur/colour filter and no slow zoom on a playing video */
+.bgv video{filter:none;transform:none;transition:opacity 1.6s ease}
+.bgv video.on{transform:none}
+/* full-wide video sections: no filter or mask on the moving picture; the dark overlay hides the edge instead */
+.vfeat .vbg,.vfeat.right .vbg{filter:none;-webkit-mask-image:none;mask-image:none}
+@media (min-width:861px){
+  .vfeat::after{background:
+    linear-gradient(90deg,var(--bg) 0%,var(--bg) 26%,rgba(6,11,26,.9) 34%,rgba(6,11,26,.55) 46%,rgba(6,11,26,.08) 60%,rgba(6,11,26,0) 100%),
+    linear-gradient(180deg,var(--bg) 0%,rgba(6,11,26,0) 10%,rgba(6,11,26,0) 90%,var(--bg) 100%)}
+  .vfeat.right::after{background:
+    linear-gradient(270deg,var(--bg) 0%,var(--bg) 26%,rgba(6,11,26,.9) 34%,rgba(6,11,26,.55) 46%,rgba(6,11,26,.08) 60%,rgba(6,11,26,0) 100%),
+    linear-gradient(180deg,var(--bg) 0%,rgba(6,11,26,0) 10%,rgba(6,11,26,0) 90%,var(--bg) 100%)}
+}
+/* frosted-glass labels sitting on video: solid tint instead of live blur */
+.vfeat .vtag,.slide .tag,.frame .vbadge,.gi .play,.hero .shot .badge{backdrop-filter:none;-webkit-backdrop-filter:none;background:rgba(6,11,26,.82)}
+.qcard{backdrop-filter:none;-webkit-backdrop-filter:none}
+.nav.solid,.nav.open{backdrop-filter:none;-webkit-backdrop-filter:none;background:rgba(6,11,26,.95)}
+/* section photo backdrops: no blur filter */
+.fadebg::before{filter:none}
+.frame::before{filter:none}
+/* give each video section its own layer so scrolling just moves it */
+.vfeat,.bgv{contain:paint}
