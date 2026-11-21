@@ -18,6 +18,7 @@ PAGES = {
     "contact":  ("Contact & Free Quote | Sydney Laser Cleaning",
                  "Get a free laser cleaning quote. Text a photo to 0432 722 498 or email sydneylasercleaning@gmail.com."),
 }
+SITE_URL = "https://smpr2026.github.io/sydney-laser-cleaning/"  # change when the own domain goes live
 NAV = [("index", "Home"), ("services", "Services"), ("hire", "Machine hire"), ("gallery", "Gallery"), ("contact", "Contact")]
 
 def head(title, desc):
@@ -31,7 +32,15 @@ def head(title, desc):
 <meta name="theme-color" content="#060b1a">
 <meta property="og:title" content="{title}">
 <meta property="og:description" content="{desc}">
-<meta property="og:image" content="video/job1-poster.jpg">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Sydney Laser Cleaning">
+<meta property="og:url" content="{SITE_URL}">
+<meta property="og:image" content="{SITE_URL}img/share.jpg?v=2">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Sydney Laser Cleaning: laser line clearing rust off a steel beam">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="{SITE_URL}img/share.jpg?v=2">
 <link rel="icon" href="img/logo-mark.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
