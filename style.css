@@ -581,3 +581,6 @@ footer .about{color:var(--muted);margin-top:16px;max-width:36ch;font-size:15px}
 .msafe li{color:#c9d5e8;line-height:1.55}.msafe li b{color:#fff}
 .mlink{display:inline-flex;align-items:center;gap:8px;margin-top:18px;color:var(--cyan);font-weight:700}
 @media (max-width:860px){.mgrid,.msafe ul{grid-template-columns:1fr}.mshot{aspect-ratio:4/3}}
+.gnote{display:flex;gap:14px;align-items:flex-start;margin-top:18px;padding:16px 18px;border-radius:16px;background:rgba(56,189,248,.08);border:1px solid var(--line2);color:#dbe4f2;line-height:1.55;font-size:15px}
+.gnote i{font-size:26px;color:var(--cyan);flex:none;margin-top:1px}
+.gnote b{color:#fff}
