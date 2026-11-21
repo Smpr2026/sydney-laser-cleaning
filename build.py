@@ -35,16 +35,16 @@ def head(title, desc):
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Sydney Laser Cleaning">
 <meta property="og:url" content="{SITE_URL}">
-<meta property="og:image" content="{SITE_URL}img/share.jpg?v=2">
+<meta property="og:image" content="{SITE_URL}img/share.jpg?v=3">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Sydney Laser Cleaning: laser line clearing rust off a steel beam">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="{SITE_URL}img/share.jpg?v=2">
-<link rel="icon" href="img/logo-mark.svg" type="image/svg+xml">
+<meta name="twitter:image" content="{SITE_URL}img/share.jpg?v=3">
+<link rel="icon" href="img/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Montserrat:wght@700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
 <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css">
 <link rel="stylesheet" href="style.css?v={VER}">
@@ -60,7 +60,7 @@ def nav(active):
     mlinks = "".join(f'<a href="{k}.html">{n}</a>' for k, n in NAV)
     return f"""<header class="nav">
   <div class="wrap">
-    <a class="brand" href="index.html" aria-label="Sydney Laser Cleaning home"><img src="img/logo-mark.svg" alt=""><span><b>Sydney Laser</b><small>Cleaning</small></span></a>
+    <a class="brand" href="index.html" aria-label="Sydney Laser Cleaning home"><img src="img/logo-mark.svg?v=2" alt=""><span class="wm"><b>SYDNEY<sup>&reg;</sup></b><small>LASER CLEANING</small></span></a>
     <ul class="links">{links}</ul>
     <a class="btn btn-p" href="contact.html">Get a free quote</a>
     <button class="burger" type="button" aria-label="Menu" aria-expanded="false"><i class="ph ph-list"></i></button>
@@ -73,7 +73,7 @@ FOOT = """<footer>
   <div class="wrap">
     <div class="fgrid">
       <div>
-        <a class="brand" href="index.html"><img src="img/logo-mark.svg" alt=""><span><b>Sydney Laser</b><small>Cleaning</small></span></a>
+        <a class="brand" href="index.html"><img src="img/logo-mark.svg?v=2" alt=""><span class="wm"><b>SYDNEY<sup>&reg;</sup></b><small>LASER CLEANING</small></span></a>
         <p class="about">Laser cleaning machine hire and on-site laser cleaning across Sydney. Rust, paint, graffiti and soot off, surface left intact.</p>
       </div>
       <div><h4>Pages</h4><ul><li><a href="index.html">Home</a></li><li><a href="services.html">Services</a></li><li><a href="hire.html">Machine hire</a></li><li><a href="gallery.html">Gallery</a></li><li><a href="contact.html">Contact</a></li></ul></div>
