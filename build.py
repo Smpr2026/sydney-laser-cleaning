@@ -18,7 +18,7 @@ PAGES = {
     "contact":  ("Contact & Free Quote | Sydney Laser Cleaning",
                  "Get a free laser cleaning quote. Text a photo to 0432 722 498 or email sydneylasercleaning@gmail.com."),
 }
-SITE_URL = "https://smpr2026.github.io/sydney-laser-cleaning/"  # change when the own domain goes live
+SITE_URL = "https://sydneylasercleaning.com.au/"
 NAV = [("index", "Home"), ("services", "Services"), ("hire", "Machine hire"), ("gallery", "Gallery"), ("contact", "Contact")]
 
 def head(title, desc):
@@ -41,6 +41,17 @@ def head(title, desc):
 <meta property="og:image:alt" content="Sydney Laser Cleaning: laser line clearing rust off a steel beam">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="{SITE_URL}img/share.jpg?v=3">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-X6KDXRPL9P"></script>
+<script>
+window.dataLayer=window.dataLayer||[];function gtag(){{dataLayer.push(arguments);}}
+gtag('js',new Date());gtag('config','G-X6KDXRPL9P');
+document.addEventListener('click',function(e){{var a=e.target.closest&&e.target.closest('a[href]');if(!a)return;var h=a.getAttribute('href');
+if(h.indexOf('tel:')===0)gtag('event','call_click',{{link_url:h}});
+else if(h.indexOf('sms:')===0)gtag('event','sms_click',{{link_url:h}});
+else if(h.indexOf('mailto:')===0)gtag('event','email_click',{{link_url:h}});
+else if(/contact[.]html/.test(h)&&a.classList.contains('btn'))gtag('event','quote_button_click');}});
+document.addEventListener('submit',function(e){{gtag('event','generate_lead',{{form_id:e.target.id||'form'}});}});
+</script>
 <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
