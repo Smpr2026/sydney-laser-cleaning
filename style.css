@@ -636,3 +636,4 @@ footer .about{color:var(--muted);margin-top:16px;max-width:36ch;font-size:15px}
 .svc .cta{text-align:left}
 .svc .cta>div:first-child{flex:1 1 380px}
 .svc .cta h2,.svc .cta p{text-align:left;margin-left:0;margin-right:0;max-width:none}
+.svc .cta .btns{margin-top:0;justify-content:flex-start}.svc .cta{padding:clamp(28px,4vw,44px)}
