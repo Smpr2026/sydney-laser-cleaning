@@ -137,7 +137,7 @@ for i,(slug,title,desc,dur) in enumerate(VIDEOS):
   <div class="wrap" style="max-width:960px">
     <span class="kicker">Job video</span>
     <h1 class="disp" style="font-size:clamp(30px,4.5vw,52px)">{_h.escape(title)}</h1>
-    <video controls playsinline preload="metadata" poster="video/{slug}-poster.jpg" style="width:100%;border-radius:18px;margin-top:24px;background:#000">
+    <video controls playsinline preload="metadata" poster="video/{slug}-poster.jpg" style="width:100%;max-height:75vh;object-fit:contain;border-radius:18px;margin-top:24px;background:#000">
       <source src="video/{slug}.mp4" type="video/mp4">
     </video>
     <p style="color:#c9d6ea;font-size:18px;margin-top:20px;max-width:64ch">{_h.escape(desc)}</p>
