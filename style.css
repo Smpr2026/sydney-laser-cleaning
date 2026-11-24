@@ -226,7 +226,7 @@ button,input,select,textarea{font:inherit;color:inherit}
 
 /* footer */
 footer{border-top:1px solid var(--line);margin-top:clamp(80px,10vw,120px);padding:56px 0 calc(32px + env(safe-area-inset-bottom));background:linear-gradient(180deg,transparent,rgba(10,19,40,.8))}
-.fgrid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:40px}
+.fgrid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:40px}
 footer h4{font-family:var(--display);font-size:15px;margin-bottom:14px}
 footer ul{list-style:none;display:grid;gap:8px;color:var(--muted)}
 footer ul a:hover{color:#fff}

@@ -1,5 +1,5 @@
 (() => {
-  const PHONE = '0432722498', EMAIL = 'sydneylasercleaning@gmail.com';
+  const PHONE = '0432722498', EMAIL = 'zap@sydneylasercleaning.com.au';
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   document.querySelectorAll('[data-year]').forEach(el => el.textContent = new Date().getFullYear());
 
