@@ -103,3 +103,64 @@ for key, (title, desc) in PAGES.items():
     body = (ROOT / "pages" / f"{key}.html").read_text().replace("__BVER__", VER)
     (ROOT / f"{key}.html").write_text(head(title, desc) + nav(key) + "<main>\n" + body + "\n</main>\n" + FOOT.replace("__VER__", VER))
     print("built", key + ".html")
+
+
+# ---- Video watch pages (one per job video, so Google can index them) ----
+import json, html as _h
+from datetime import date
+VIDEOS = [
+  # slug, title, description, duration_seconds
+  ("rim-timelapse", "Car rim laser stripped back to bare steel (time-lapse)", "Time-lapse of a car rim going from old cream paint to bare steel with laser cleaning in Sydney. No sandblasting, no chemicals, no damage to the metal underneath.", 16),
+  ("pulse-pitting", "200W pulse laser lifting pitted rust out of a car panel", "A 200W pulse laser cleaning pitted rust out of a sanded car panel. The laser reaches into the pits that sanding leaves behind, so the panel is ready to prime.", 16),
+  ("angle-rust", "Rusty steel angle laser cleaned down one face", "Laser rust removal on a steel angle in Sydney. One face is cleaned back to bright metal in a single pass so you can see the before and after side by side.", 16),
+  ("stone-step", "Stone step cleaned with a 200W pulse laser", "Grime and staining lifted off a stone step with a 200W pulse laser. Laser cleaning works on stone and concrete without water blasting or harsh chemicals.", 19),
+  ("cw-ceiling", "1500W laser clearing fire soot off a concrete ceiling", "Fire damage restoration in Sydney: a 1500W continuous laser clearing heavy fire soot off a concrete ceiling, with no water, chemicals or mess.", 18),
+  ("soot-ceiling", "Laser removing soot damage from a balcony", "Soot damage on a balcony that other cleaning methods could not shift. The laser lifted it off and left the surface intact.", 11),
+  ("job-9950", "Laser line clearing rust off a steel beam", "Industrial laser rust removal on a steel beam, filmed on site in Sydney. The laser line strips rust back to bare steel ready for coating.", 14),
+  ("job-9962", "Long steel rail half cleaned with a laser", "A long steel rail half laser cleaned, showing the rusty and cleaned sections side by side. On-site laser rust removal across Sydney.", 13),
+  ("job1", "Rusty steel rail cleaned in one pass", "Laser cleaning a rusty steel rail back to bare metal in one pass. No sandblasting media to clean up and no damage to the steel.", 17),
+  ("job-0153", "Yellow paint laser stripped off a steel rail", "Laser paint removal: yellow paint stripped off a steel rail in Sydney without grinding, chemicals or blasting.", 14),
+  ("job-0149", "Laser cleaning under a steel rail on site", "Laser cleaning the underside of a steel rail on site in Sydney, getting into tight spots a grinder or blaster can't reach.", 14),
+]
+UPLOAD = "2026-11-23T00:00:00+11:00"
+BASE = "https://sydneylasercleaning.com.au/"
+
+def video_ld(slug, title, desc, dur):
+    return {"@context":"https://schema.org","@type":"VideoObject","name":title,"description":desc,
+            "thumbnailUrl":[BASE+f"video/{slug}-poster.jpg"],"uploadDate":UPLOAD,
+            "duration":f"PT{dur}S","contentUrl":BASE+f"video/{slug}.mp4","embedUrl":BASE+f"video-{slug}.html",
+            "publisher":{"@type":"Organization","name":"Sydney Laser Cleaning","logo":{"@type":"ImageObject","url":BASE+"img/share.jpg"}}}
+
+for i,(slug,title,desc,dur) in enumerate(VIDEOS):
+    others = "".join(f'<li><a href="video-{s}.html">{_h.escape(t)}</a></li>' for s,t,_,_ in VIDEOS if s!=slug)
+    body = f"""<section class="sec" style="padding-top:140px">
+  <div class="wrap" style="max-width:960px">
+    <span class="kicker">Job video</span>
+    <h1 class="disp" style="font-size:clamp(30px,4.5vw,52px)">{_h.escape(title)}</h1>
+    <video controls playsinline preload="metadata" poster="video/{slug}-poster.jpg" style="width:100%;border-radius:18px;margin-top:24px;background:#000">
+      <source src="video/{slug}.mp4" type="video/mp4">
+    </video>
+    <p style="color:#c9d6ea;font-size:18px;margin-top:20px;max-width:64ch">{_h.escape(desc)}</p>
+    <p style="margin-top:26px;display:flex;gap:12px;flex-wrap:wrap"><a class="btn btn-p" href="contact.html">Get a free quote</a><a class="btn btn-o" href="gallery.html">See the full gallery</a></p>
+    <h2 class="disp" style="font-size:24px;margin-top:56px">More laser cleaning videos</h2>
+    <ul style="margin-top:14px;line-height:2;color:#c9d6ea">{others}</ul>
+  </div>
+</section>
+<script type="application/ld+json">{json.dumps(video_ld(slug,title,desc,dur))}</script>"""
+    (ROOT / f"video-{slug}.html").write_text(head(f"{title} | Sydney Laser Cleaning", desc) + nav("gallery") + "<main>\n" + body + "\n</main>\n" + FOOT.replace("__VER__", VER))
+    print("built", f"video-{slug}.html")
+
+# video list on the gallery page + sitemap with video entries
+glist = "".join(f'<li><a href="video-{s}.html">{_h.escape(t)}</a></li>' for s,t,_,_ in VIDEOS)
+g = (ROOT/"gallery.html").read_text()
+g = g.replace("\n</main>\n", f'\n<section class="sec" style="padding-top:0"><div class="wrap"><h2 class="disp" style="font-size:28px">All job videos</h2><ul style="margin-top:14px;line-height:2;color:#c9d6ea">{glist}</ul></div></section>\n</main>\n',1)
+(ROOT/"gallery.html").write_text(g)
+
+today = date.today().isoformat()
+urls = "".join(f"  <url><loc>{BASE}{p}</loc><lastmod>{today}</lastmod></url>\n" for p in ["","services.html","hire.html","gallery.html","contact.html"])
+for slug,title,desc,dur in VIDEOS:
+    urls += f"""  <url><loc>{BASE}video-{slug}.html</loc><lastmod>{today}</lastmod>
+    <video:video><video:thumbnail_loc>{BASE}video/{slug}-poster.jpg</video:thumbnail_loc><video:title>{_h.escape(title)}</video:title><video:description>{_h.escape(desc)}</video:description><video:content_loc>{BASE}video/{slug}.mp4</video:content_loc><video:duration>{dur}</video:duration></video:video></url>
+"""
+(ROOT/"sitemap.xml").write_text(f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">\n{urls}</urlset>\n')
+print("built sitemap.xml")
