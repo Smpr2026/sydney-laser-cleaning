@@ -9,7 +9,7 @@ ROOT = Path(__file__).parent
 PAGES = {
     "index":    ("Sydney Laser Cleaning | Laser Cleaning Hire & Services in Sydney",
                  "Laser cleaning machine hire and on-site laser cleaning across Sydney. Rust, paint, graffiti and fire damage removed without chemicals or sandblasting. Call 0432 722 498."),
-    "services": ("Laser Cleaning Services | Rust, Paint, Graffiti & Fire Damage | Sydney Laser Cleaning",
+    "services": ("Laser Cleaning Services Sydney | Rust, Paint, Graffiti",
                  "Rust removal, paint stripping, graffiti removal and fire damage restoration by laser in Sydney. No chemicals, no blasting media, no damage to the surface."),
     "hire":     ("Laser Cleaning Machine Hire Sydney | Sydney Laser Cleaning",
                  "Hire a laser cleaning machine by the day, week or month in Sydney. Hire 6 days get 1 free, 30 days 30% off. Call 0432 722 498."),
@@ -178,7 +178,7 @@ for i,(slug,title,desc,dur) in enumerate(VIDEOS):
   </div>
 </section>
 <script type="application/ld+json">{json.dumps(video_ld(slug,title,desc,dur))}</script>"""
-    (ROOT / f"video-{slug}.html").write_text(head(f"{title} | Sydney Laser Cleaning", desc, f"video-{slug}.html", f"video/{slug}-poster.jpg") + nav("gallery") + "<main>\n" + body + "\n</main>\n" + FOOT.replace("__VER__", VER))
+    (ROOT / f"video-{slug}.html").write_text(head(f"{title} | Laser Cleaning Sydney" if len(title)<45 else title, desc, f"video-{slug}.html", f"video/{slug}-poster.jpg") + nav("gallery") + "<main>\n" + body + "\n</main>\n" + FOOT.replace("__VER__", VER))
     print("built", f"video-{slug}.html")
 
 # video list on the gallery page + sitemap with video entries
@@ -199,7 +199,7 @@ print("built sitemap.xml")
 # ---- Service landing pages (one per search term people use) ----
 SVC = [
  dict(file="laser-rust-removal-sydney.html", short="Rust removal", kicker="Metal",
-  title="Laser Rust Removal Sydney | No Sandblasting, No Chemicals | Sydney Laser Cleaning",
+  title="Laser Rust Removal Sydney | On Site & Machine Hire",
   desc="Laser rust removal across Sydney for steel beams, rails, trailers, machinery, car panels and parts. Back to bare metal, ready to prime or weld. Free quote: 0432 722 498.",
   h1="Laser rust removal in Sydney", video="job-9950", image="img/real/rail-cleaning.jpg",
   intro="We take rust off steel of any size with a laser: beams, rails, trailers, machinery, wheels, tools and car panels. The beam lifts the surface oxide and leaves the steel underneath as it was, so the part is ready to prime or weld straight after. No grit, no chemicals and nothing to wash away.",
@@ -211,7 +211,7 @@ SVC = [
        ("Can you remove rust on site?","Yes. We bring the machine and an operator to your site anywhere in Sydney. You can also hire a machine and do it yourself."),
        ("How much does laser rust removal cost?","It depends on the size and condition of the job. Text a photo to 0432 722 498 and we'll give you a free quote.")]),
  dict(file="laser-paint-removal-sydney.html", short="Paint removal", kicker="Coatings",
-  title="Laser Paint Removal Sydney | Car Panels, Rims & Machinery | Sydney Laser Cleaning",
+  title="Laser Paint Removal Sydney | Car Panels, Rims, Steel",
   desc="Laser paint stripping in Sydney for car bodies, rims, classic restorations, powder coat and machinery. Back to bare metal with no blasting dust or chemical stripper. Free quote.",
   h1="Laser paint removal in Sydney", video="rim-timelapse", image="img/real/rim-after.jpg",
   intro="We strip paint and coatings back to bare metal with a laser: car panels, rims, classic restorations, powder coat and machinery. There's no blasting dust through the workshop and no chemical stripper to wash off.",
@@ -223,7 +223,7 @@ SVC = [
        ("Is laser paint removal better than sandblasting?","There's no grit to clean up, no dust through the workshop and the metal underneath isn't worn down by blasting media."),
        ("How do I get a price?","Text a photo of the part to 0432 722 498 for a free quote.")]),
  dict(file="graffiti-removal-sydney.html", short="Graffiti removal", kicker="Masonry",
-  title="Laser Graffiti Removal Sydney | Sandstone, Brick & Heritage | Sydney Laser Cleaning",
+  title="Graffiti Removal Sydney | Laser, Safe on Sandstone",
   desc="Laser graffiti removal in Sydney for sandstone, brick, heritage walls and roller shutters. Lifts the paint and leaves the wall, without sandblasting or harsh chemicals.",
   h1="Laser graffiti removal in Sydney", video="stone-step", image="img/graffiti.jpg",
   intro="Steam and chemicals often don't get all the graffiti off, and sandblasting wears down the surface, which is a real problem on soft stone and heritage buildings. The laser lifts the paint and leaves the wall.",
@@ -235,7 +235,7 @@ SVC = [
        ("Do you use chemicals?","No. Laser cleaning uses no chemicals, no grit and no water."),
        ("Do you come to us?","Yes, we bring the machine to your site anywhere in Sydney.")]),
  dict(file="fire-damage-soot-removal-sydney.html", short="Fire damage", kicker="Restoration",
-  title="Fire Damage & Soot Removal Sydney | Laser Cleaning | Sydney Laser Cleaning",
+  title="Fire Damage & Soot Removal Sydney | Laser Cleaning",
   desc="Laser soot and smoke damage removal in Sydney for concrete ceilings, brick, timber and plaster. Shifts soot that pressure washing and chemicals couldn't. Free quote.",
   h1="Fire damage and soot removal in Sydney", video="cw-ceiling", image="img/real/ceiling.jpg",
   intro="We remove fire soot and smoke staining with a laser. On a concrete ceiling where pressure washing and chemicals couldn't shift the soot, our 1500W continuous laser did. On a balcony where other methods had already failed, the laser lifted it. The beam reflects off white plasterboard and painted walls while it removes the soot, so restoration doesn't have to mean repainting everything.",
@@ -247,7 +247,7 @@ SVC = [
        ("Do I need to repaint after?","Not always. The beam reflects off white plasterboard and painted walls while it removes the soot. Send a photo and we'll tell you what to expect."),
        ("Do you work with insurance and restoration jobs?","Send us the details and photos and we'll quote the job.")]),
  dict(file="concrete-stone-cleaning-sydney.html", short="Concrete & stone", kicker="Concrete & stone",
-  title="Concrete, Brick & Stone Cleaning Sydney | Laser Cleaning | Sydney Laser Cleaning",
+  title="Concrete & Stone Cleaning Sydney | Laser Cleaning",
   desc="Laser cleaning for concrete, brick and stone in Sydney: fire soot, mould staining and grime, including ceilings and stone steps. No chemicals or water blasting.",
   h1="Concrete, brick and stone cleaning in Sydney", video="stone-step", image="img/real/ceiling.jpg",
   intro="We take fire soot, mould staining and grime off concrete, brick and stone, including overhead work like ceilings and soffits. The 200W pulse laser also brings stone steps and floors back up clean.",
