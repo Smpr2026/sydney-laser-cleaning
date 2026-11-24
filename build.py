@@ -165,17 +165,19 @@ def video_ld(slug, title, desc, dur):
 
 for i,(slug,title,desc,dur) in enumerate(VIDEOS):
     others = "".join(f'<li><a href="video-{s}.html">{_h.escape(t)}</a></li>' for s,t,_,_ in VIDEOS if s!=slug)
-    body = f"""<section class="sec" style="padding-top:140px">
-  <div class="wrap" style="max-width:960px">
+    others = "".join(f'<a href="video-{s2}.html">{_h.escape(t2)}<i class="ph ph-play-circle"></i></a>' for s2,t2,_,_ in VIDEOS if s2!=slug)
+    body = f"""<section class="sec" style="padding-top:130px">
+  <div class="wrap svc">
+    <nav class="bc" aria-label="Breadcrumb"><a href="index.html">Home</a> › <a href="gallery.html">Gallery</a> › Video</nav>
     <span class="kicker">Job video</span>
     <h1 class="disp" style="font-size:clamp(30px,4.5vw,52px)">{_h.escape(title)}</h1>
-    <video controls playsinline preload="metadata" poster="video/{slug}-poster.jpg" style="width:100%;max-height:75vh;object-fit:contain;border-radius:18px;margin-top:24px;background:#000">
-      <source src="video/{slug}.mp4" type="video/mp4">
-    </video>
-    <p style="color:#c9d6ea;font-size:18px;margin-top:20px;max-width:64ch">{_h.escape(desc)}</p>
-    <p style="margin-top:26px;display:flex;gap:12px;flex-wrap:wrap"><a class="btn btn-p" href="contact.html">Get a free quote</a><a class="btn btn-o" href="gallery.html">See the full gallery</a></p>
-    <h2 class="disp" style="font-size:24px;margin-top:56px">More laser cleaning videos</h2>
-    <ul style="margin-top:14px;line-height:2;color:#c9d6ea">{others}</ul>
+    <div class="vid"><video controls playsinline preload="metadata" poster="video/{slug}-poster.jpg"><source src="video/{slug}.mp4" type="video/mp4"></video></div>
+    <p class="lede">{_h.escape(desc)}</p>
+    <p style="display:flex;gap:12px;flex-wrap:wrap;margin-top:26px"><a class="btn btn-p" href="contact.html">Get a free quote</a><a class="btn btn-o" href="gallery.html"><i class="ph ph-images-square"></i>Full gallery</a></p>
+    <div class="blk">
+      <h2 style="font-size:26px">More laser cleaning videos</h2>
+      <div class="ogrid">{others}</div>
+    </div>
   </div>
 </section>
 <script type="application/ld+json">{json.dumps(video_ld(slug,title,desc,dur))}</script>"""
@@ -183,9 +185,9 @@ for i,(slug,title,desc,dur) in enumerate(VIDEOS):
     print("built", f"video-{slug}.html")
 
 # video list on the gallery page + sitemap with video entries
-glist = "".join(f'<li><a href="video-{s}.html">{_h.escape(t)}</a></li>' for s,t,_,_ in VIDEOS)
+glist = "".join(f'<a href="video-{s}.html">{_h.escape(t)}<i class="ph ph-play-circle"></i></a>' for s,t,_,_ in VIDEOS)
 g = (ROOT/"gallery.html").read_text()
-g = g.replace("\n</main>\n", f'\n<section class="sec" style="padding-top:0"><div class="wrap"><h2 class="disp" style="font-size:28px">All job videos</h2><ul style="margin-top:14px;line-height:2;color:#c9d6ea">{glist}</ul></div></section>\n</main>\n',1)
+g = g.replace("\n</main>\n", f'\n<section class="sec" style="padding-top:0"><div class="wrap svc" style="max-width:1240px"><h2 style="font-size:28px">All job videos</h2><div class="ogrid">{glist}</div></div></section>\n</main>\n',1)
 (ROOT/"gallery.html").write_text(g)
 
 today = date.today().isoformat()
@@ -278,38 +280,63 @@ for sv in SVC:
     service_ld = {"@context":"https://schema.org","@type":"Service","name":sv["h1"],"serviceType":sv["short"],
                   "provider":{"@id":SITE_URL+"#business"},"areaServed":{"@type":"City","name":"Sydney"},"url":SITE_URL+sv["file"],"description":sv["desc"]}
     extra = "".join(f'\n<script type="application/ld+json">{json.dumps(x)}</script>' for x in (service_ld, faq_ld(sv["faq"]), crumbs_ld(sv["short"], sv["file"])))
-    body = f"""<section class="phero">
+    ticks = "".join(f'<div><i class="ph-fill ph-check-circle"></i>{_h.escape(x)}</div>' for x in sv["why"])
+    chips = "".join(f"<span>{_h.escape(x)}</span>" for x in sv["items"])
+    areas_chips = "".join(f"<span>{_h.escape(a)}</span>" for a in AREAS)
+    faqhtml = "".join(f'<details><summary>{_h.escape(q)}</summary><p>{_h.escape(a)}</p></details>' for q,a in sv["faq"])
+    ogrid = "".join(f'<a href="{x["file"]}">{_h.escape(x["short"] if x["short"]!="Fire damage" else "Fire damage & soot")}<i class="ph ph-arrow-right"></i></a>' for x in SVC if x is not sv) + '<a href="hire.html">Machine hire<i class="ph ph-arrow-right"></i></a>'
+    body = f"""<section class="phero svch">
   <img src="{sv['image']}" alt="">
   <div class="wrap">
     <span class="kicker in i1">{_h.escape(sv['kicker'])}</span>
     <h1 class="disp in i2">{_h.escape(sv['h1'])}</h1>
     <p class="in i3">{_h.escape(sv['intro'])}</p>
-    <p class="in i3" style="display:flex;gap:12px;flex-wrap:wrap;margin-top:26px"><a class="btn btn-p" href="contact.html">Get a free quote</a><a class="btn btn-o" href="sms:0432722498">Text a photo</a></p>
+    <p class="in i3" style="display:flex;gap:12px;flex-wrap:wrap;margin-top:28px"><a class="btn btn-p" href="contact.html">Get a free quote</a><a class="btn btn-o" href="sms:0432722498"><i class="ph ph-chat-circle-text"></i>Text a photo</a></p>
   </div>
 </section>
-<section class="sec">
-  <div class="wrap" style="max-width:1000px">
-    <nav aria-label="Breadcrumb" style="color:#94a3b8;font-size:14px;margin-bottom:28px"><a href="index.html">Home</a> › <a href="services.html">Services</a> › {_h.escape(sv['short'])}</nav>
-    <h2 class="disp" style="font-size:clamp(26px,3.4vw,38px)">Why use a laser</h2>
-    <ul style="margin-top:16px;line-height:1.9;color:#c9d6ea;font-size:18px">{ul(sv['why'])}</ul>
-    <h2 class="disp" style="font-size:clamp(26px,3.4vw,38px);margin-top:48px">What we clean</h2>
-    <ul style="margin-top:16px;line-height:1.9;color:#c9d6ea;font-size:18px">{ul(sv['items'])}</ul>
-    <h2 class="disp" style="font-size:clamp(26px,3.4vw,38px);margin-top:48px">Watch a real job</h2>
-    <video controls playsinline preload="none" poster="video/{sv['video']}-poster.jpg" style="width:100%;max-height:70vh;object-fit:contain;border-radius:18px;margin-top:18px;background:#000" aria-label="{_h.escape(vt)}"><source src="video/{sv['video']}.mp4" type="video/mp4"></video>
-    <p style="color:#94a3b8;margin-top:10px"><a href="video-{sv['video']}.html">{_h.escape(vt)}</a></p>
-    <h2 class="disp" style="font-size:clamp(26px,3.4vw,38px);margin-top:48px">Which laser we use</h2>
-    <p style="color:#c9d6ea;font-size:18px;margin-top:16px;max-width:70ch">{_h.escape(sv['machine'])} Not sure which one your job needs? Send us a photo and we'll tell you.</p>
-    <h2 class="disp" style="font-size:clamp(26px,3.4vw,38px);margin-top:48px">On site across Sydney, or hire the machine</h2>
-    <p style="color:#c9d6ea;font-size:18px;margin-top:16px;max-width:70ch">We bring the machine and an operator to your site, Sydney wide, including {areas}. Rather do it yourself? <a href="hire.html">Hire a laser cleaning machine</a> by the day, week or month.</p>
-    <h2 class="disp" style="font-size:clamp(26px,3.4vw,38px);margin-top:48px">Questions</h2>
-    {faqhtml}
-    <div style="margin-top:48px;padding:28px;border-radius:20px;background:rgba(37,99,235,.12);border:1px solid rgba(37,99,235,.35)">
-      <h2 class="disp" style="font-size:28px">Free quote</h2>
-      <p style="color:#c9d6ea;margin-top:8px">Text a photo of the job to <a href="sms:0432722498">0432 722 498</a> or email <a href="mailto:{EMAIL}">{EMAIL}</a>.</p>
-      <p style="margin-top:18px"><a class="btn btn-p" href="contact.html">Get a free quote</a></p>
+<section class="sec" style="padding-top:56px">
+  <div class="wrap svc">
+    <nav class="bc" aria-label="Breadcrumb"><a href="index.html">Home</a> › <a href="services.html">Services</a> › {_h.escape(sv['short'])}</nav>
+    <div class="blk">
+      <span class="kicker">Why laser</span>
+      <h2>Why use a laser</h2>
+      <div class="ticks">{ticks}</div>
     </div>
-    <h2 class="disp" style="font-size:24px;margin-top:48px">Other laser cleaning services</h2>
-    <ul style="margin-top:14px;line-height:2;color:#c9d6ea">{others}<li><a href="hire.html">Laser cleaning machine hire</a></li></ul>
+    <div class="blk">
+      <span class="kicker">What we clean</span>
+      <h2>Jobs we do</h2>
+      <div class="chips">{chips}</div>
+    </div>
+    <div class="blk">
+      <span class="kicker">Real job</span>
+      <h2>Watch it work</h2>
+      <div class="vid"><video controls playsinline preload="none" poster="video/{sv['video']}-poster.jpg" aria-label="{_h.escape(vt)}"><source src="video/{sv['video']}.mp4" type="video/mp4"></video></div>
+      <a class="vcap" href="video-{sv['video']}.html"><i class="ph-fill ph-play-circle"></i>{_h.escape(vt)}</a>
+    </div>
+    <div class="blk">
+      <span class="kicker">Our machines</span>
+      <h2>Which laser we use</h2>
+      <div class="machine"><span class="ic"><i class="ph ph-lightning"></i></span><p>{_h.escape(sv['machine'])} Not sure which one your job needs? <a class="inl" href="sms:0432722498">Send us a photo</a> and we'll tell you.</p></div>
+    </div>
+    <div class="blk">
+      <span class="kicker">Sydney wide</span>
+      <h2>On site, or hire the machine</h2>
+      <p class="lede">We bring the machine and an operator to your site anywhere in Sydney. Rather do it yourself? <a class="inl" href="hire.html">Hire a laser cleaning machine</a> by the day, week or month.</p>
+      <div class="areas">{areas_chips}</div>
+    </div>
+    <div class="blk">
+      <span class="kicker">FAQ</span>
+      <h2>Common questions</h2>
+      <div class="faq">{faqhtml}</div>
+    </div>
+    <div class="cta">
+      <div><h2>Get a free quote</h2><p>Text a photo of the job to <a class="inl" href="sms:0432722498">0432 722 498</a> or email <a class="inl" href="mailto:{EMAIL}">{EMAIL}</a></p></div>
+      <div class="btns"><a class="btn btn-p" href="contact.html">Get a free quote</a><a class="btn btn-o" href="tel:0432722498"><i class="ph ph-phone"></i>Call</a></div>
+    </div>
+    <div class="blk">
+      <h2 style="font-size:26px">Other laser cleaning services</h2>
+      <div class="ogrid">{ogrid}</div>
+    </div>
   </div>
 </section>"""
     (ROOT/sv["file"]).write_text(head(sv["title"], sv["desc"], sv["file"], sv["image"], extra) + nav("services") + "<main>\n" + body + "\n</main>\n" + FOOT.replace("__VER__", VER))
