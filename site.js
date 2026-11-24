@@ -28,11 +28,11 @@
   }), { threshold: .6 });
   document.querySelectorAll('[data-count]').forEach(el => cio.observe(el));
 
-  /* floating text button appears after the first screen */
+  /* floating email button appears after the first screen */
   const fab = document.querySelector('.fab');
   if (fab && top) new IntersectionObserver(([e]) => fab.classList.toggle('show', !e.isIntersecting), { rootMargin: '400px 0px 0px 0px' }).observe(top);
 
-  /* quote / hire forms: no server needed, they open a filled-in email or text message */
+  /* quote / hire forms: no server needed, they open a filled-in email */
   document.querySelectorAll('form[data-send]').forEach(form => {
     form.addEventListener('submit', ev => {
       ev.preventDefault();

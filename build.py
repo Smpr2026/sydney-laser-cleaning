@@ -45,7 +45,7 @@ BIZ_LD = _json.dumps({
 
 NAV = [("index", "Home"), ("services", "Services"), ("hire", "Machine hire"), ("gallery", "Gallery"), ("contact", "Contact")]
 
-def head(title, desc, path="", image="img/share.jpg?v=3", extra_ld=""):
+def head(title, desc, path="", image="img/share.jpg?v=4", extra_ld=""):
     url = SITE_URL + ("" if path in ("", "index.html") else path)
     return f"""<!doctype html>
 <html lang="en-AU">
