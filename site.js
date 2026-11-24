@@ -1,5 +1,5 @@
 (() => {
-  const PHONE = '0432722498', EMAIL = 'zap@sydneylasercleaning.com.au';
+  const EMAIL = 'zap@sydneylasercleaning.com.au';
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   document.querySelectorAll('[data-year]').forEach(el => el.textContent = new Date().getFullYear());
 
@@ -47,9 +47,7 @@
       const subject = form.dataset.subject || 'Laser cleaning enquiry';
       const via = (form.querySelector('[name="_via"]:checked') || {}).value || 'email';
       const body = lines.filter(l => !l.startsWith('_via')).join('\n');
-      location.href = via === 'text'
-        ? `sms:${PHONE}?&body=${encodeURIComponent(subject + '\n' + body)}`
-        : `mailto:${EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      location.href = `mailto:${EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
       const done = form.querySelector('.sent'); if (done) done.hidden = false;
     });
     form.querySelectorAll('input,textarea').forEach(inp => inp.addEventListener('input', () => inp.closest('.field')?.classList.remove('bad')));

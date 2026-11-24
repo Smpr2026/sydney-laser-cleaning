@@ -8,15 +8,15 @@ VER = str(int(time.time()))
 ROOT = Path(__file__).parent
 PAGES = {
     "index":    ("Sydney Laser Cleaning | Laser Cleaning Hire & Services in Sydney",
-                 "Laser cleaning machine hire and on-site laser cleaning across Sydney. Rust, paint, graffiti and fire damage removed without chemicals or sandblasting. Call 0432 722 498."),
+                 "Laser cleaning machine hire and on-site laser cleaning across Sydney. Rust, paint, graffiti and fire damage removed without chemicals or sandblasting."),
     "services": ("Laser Cleaning Services Sydney | Rust, Paint, Graffiti",
                  "Rust removal, paint stripping, graffiti removal and fire damage restoration by laser in Sydney. No chemicals, no blasting media, no damage to the surface."),
     "hire":     ("Laser Cleaning Machine Hire Sydney | Sydney Laser Cleaning",
-                 "Hire a laser cleaning machine by the day, week or month in Sydney. Hire 6 days get 1 free, 30 days 30% off. Call 0432 722 498."),
+                 "Hire a laser cleaning machine by the day, week or month in Sydney. Hire 6 days get 1 free, 30 days 30% off."),
     "gallery":  ("Gallery | Laser Cleaning Jobs in Sydney | Sydney Laser Cleaning",
                  "Photos and videos of real laser cleaning jobs in Sydney: rust off steel rails and beams, pitted rust out of car panels, brake drums, engine parts and concrete."),
     "contact":  ("Contact & Free Quote | Sydney Laser Cleaning",
-                 "Get a free laser cleaning quote. Text a photo to 0432 722 498 or email zap@sydneylasercleaning.com.au."),
+                 "Get a free laser cleaning quote. Email a photo of the job to zap@sydneylasercleaning.com.au."),
 }
 SITE_URL = "https://sydneylasercleaning.com.au/"
 EMAIL = "zap@sydneylasercleaning.com.au"
@@ -33,7 +33,7 @@ SERVICE_PAGES = [
 ]
 BIZ_LD = _json.dumps({
   "@context":"https://schema.org","@type":"ProfessionalService","@id":SITE_URL+"#business",
-  "name":"Sydney Laser Cleaning","url":SITE_URL,"telephone":"+61432722498","email":EMAIL,
+  "name":"Sydney Laser Cleaning","url":SITE_URL,"email":EMAIL,
   "logo":SITE_URL+"img/logo-mark.svg","image":SITE_URL+"img/share.jpg",
   "description":"Laser cleaning machine hire and on-site laser cleaning across Sydney: rust removal, paint stripping, graffiti removal and fire damage soot removal, with no chemicals or sandblasting.",
   "address":{"@type":"PostalAddress","addressLocality":"Sydney","addressRegion":"NSW","addressCountry":"AU"},
@@ -120,12 +120,12 @@ FOOT = """<footer>
       </div>
       <div><h4>Pages</h4><ul><li><a href="index.html">Home</a></li><li><a href="services.html">Services</a></li><li><a href="hire.html">Machine hire</a></li><li><a href="gallery.html">Gallery</a></li><li><a href="contact.html">Contact</a></li></ul></div>
       <div><h4>Services</h4><ul><li><a href="laser-rust-removal-sydney.html">Laser rust removal</a></li><li><a href="laser-paint-removal-sydney.html">Laser paint removal</a></li><li><a href="graffiti-removal-sydney.html">Graffiti removal</a></li><li><a href="fire-damage-soot-removal-sydney.html">Fire damage &amp; soot</a></li><li><a href="concrete-stone-cleaning-sydney.html">Concrete &amp; stone</a></li></ul></div>
-      <div><h4>Get in touch</h4><ul><li><a href="tel:0432722498">0432 722 498</a></li><li><a href="mailto:zap@sydneylasercleaning.com.au">zap@sydneylasercleaning.com.au</a></li><li>Sydney, NSW</li></ul></div>
+      <div><h4>Get in touch</h4><ul><li><a href="mailto:zap@sydneylasercleaning.com.au">zap@sydneylasercleaning.com.au</a></li><li>Sydney, NSW</li></ul></div>
     </div>
     <div class="fbot"><span>&copy; <span data-year></span> Sydney Laser Cleaning</span><span>Laser cleaning hire &amp; services</span></div>
   </div>
 </footer>
-<a class="fab" href="sms:0432722498" aria-label="Text us a photo of the job"><i class="ph-fill ph-chat-circle-text"></i>Text us a photo</a>
+<a class="fab" href="mailto:zap@sydneylasercleaning.com.au?subject=Laser%20cleaning%20quote%20(photo%20attached)" aria-label="Email us a photo of the job"><i class="ph-fill ph-envelope-simple"></i>Email us a photo</a>
 <script src="site.js?v=__VER__"></script>
 </body>
 </html>
@@ -203,7 +203,7 @@ print("built sitemap.xml")
 SVC = [
  dict(file="laser-rust-removal-sydney.html", short="Rust removal", kicker="Metal",
   title="Laser Rust Removal Sydney | On Site & Machine Hire",
-  desc="Laser rust removal across Sydney for steel beams, rails, trailers, machinery, car panels and parts. Back to bare metal, ready to prime or weld. Free quote: 0432 722 498.",
+  desc="Laser rust removal across Sydney for steel beams, rails, trailers, machinery, car panels and parts. Back to bare metal, ready to prime or weld. Free quote.",
   h1="Laser rust removal in Sydney", video="job-9950", image="img/real/rail-cleaning.jpg",
   intro="We take rust off steel of any size with a laser: beams, rails, trailers, machinery, wheels, tools and car panels. The beam lifts the surface oxide and leaves the steel underneath as it was, so the part is ready to prime or weld straight after. No grit, no chemicals and nothing to wash away.",
   why=["Removes rust without changing the chemical or structural makeup of the steel","Gets into pitted rust that sanding and cutting back can't reach (200W pulse laser)","No sandblasting media to sweep up and no chemical runoff","Precise: one seam, one edge or a whole beam"],
@@ -212,7 +212,7 @@ SVC = [
   faq=[("Does laser rust removal damage the metal?","No. The laser takes off the surface rust and leaves the steel underneath intact. We match the laser to the job: the 200W pulse laser for thin panels so they don't warp, the 1500W for thick steel."),
        ("Is the steel ready to paint after laser cleaning?","Yes. Once the oxide is off, the part is ready to prime or weld straight after."),
        ("Can you remove rust on site?","Yes. We bring the machine and an operator to your site anywhere in Sydney. You can also hire a machine and do it yourself."),
-       ("How much does laser rust removal cost?","It depends on the size and condition of the job. Text a photo to 0432 722 498 and we'll give you a free quote.")]),
+       ("How much does laser rust removal cost?","It depends on the size and condition of the job. Email a photo to zap@sydneylasercleaning.com.au and we'll give you a free quote.")]),
  dict(file="laser-paint-removal-sydney.html", short="Paint removal", kicker="Coatings",
   title="Laser Paint Removal Sydney | Car Panels, Rims, Steel",
   desc="Laser paint stripping in Sydney for car bodies, rims, classic restorations, powder coat and machinery. Back to bare metal with no blasting dust or chemical stripper. Free quote.",
@@ -224,7 +224,7 @@ SVC = [
   faq=[("Can a laser remove paint from a car without damaging the panel?","Yes, with the right machine. We use the 200W pulse laser on car panels because it cleans with very little heat, so thin metal doesn't warp."),
        ("Can you strip powder coat?","Yes. Powder coat and other coatings can be stripped back to bare metal."),
        ("Is laser paint removal better than sandblasting?","There's no grit to clean up, no dust through the workshop and the metal underneath isn't worn down by blasting media."),
-       ("How do I get a price?","Text a photo of the part to 0432 722 498 for a free quote.")]),
+       ("How do I get a price?","Email a photo of the part to zap@sydneylasercleaning.com.au for a free quote.")]),
  dict(file="graffiti-removal-sydney.html", short="Graffiti removal", kicker="Masonry",
   title="Graffiti Removal Sydney | Laser, Safe on Sandstone",
   desc="Laser graffiti removal in Sydney for sandstone, brick, heritage walls and roller shutters. Lifts the paint and leaves the wall, without sandblasting or harsh chemicals.",
@@ -260,7 +260,7 @@ SVC = [
   faq=[("Can you clean stone steps with a laser?","Yes. The 200W pulse laser lifts grime off stone steps and floors."),
        ("Does it remove mould staining?","Yes, mould staining and grime can be lifted off concrete, brick and stone."),
        ("Is it safe on soft stone?","We use the 200W pulse laser on softer surfaces. Send a photo and we'll tell you if your surface suits laser cleaning."),
-       ("Do you service my area?","We work right across Sydney. Text a photo to 0432 722 498.")]),
+       ("Do you service my area?","We work right across Sydney. Email a photo to zap@sydneylasercleaning.com.au.")]),
 ]
 
 def faq_ld(faq):
@@ -291,7 +291,7 @@ for sv in SVC:
     <span class="kicker in i1">{_h.escape(sv['kicker'])}</span>
     <h1 class="disp in i2">{_h.escape(sv['h1'])}</h1>
     <p class="in i3">{_h.escape(sv['intro'])}</p>
-    <p class="in i3" style="display:flex;gap:12px;flex-wrap:wrap;margin-top:28px"><a class="btn btn-p" href="contact.html">Get a free quote</a><a class="btn btn-o" href="sms:0432722498"><i class="ph ph-chat-circle-text"></i>Text a photo</a></p>
+    <p class="in i3" style="display:flex;gap:12px;flex-wrap:wrap;margin-top:28px"><a class="btn btn-p" href="contact.html">Get a free quote</a><a class="btn btn-o" href="mailto:zap@sydneylasercleaning.com.au?subject=Laser%20cleaning%20quote%20(photo%20attached)"><i class="ph ph-envelope-simple"></i>Email a photo</a></p>
   </div>
 </section>
 <section class="sec" style="padding-top:56px">
@@ -316,7 +316,7 @@ for sv in SVC:
     <div class="blk">
       <span class="kicker">Our machines</span>
       <h2>Which laser we use</h2>
-      <div class="machine"><span class="ic"><i class="ph ph-lightning"></i></span><p>{_h.escape(sv['machine'])} Not sure which one your job needs? <a class="inl" href="sms:0432722498">Send us a photo</a> and we'll tell you.</p></div>
+      <div class="machine"><span class="ic"><i class="ph ph-lightning"></i></span><p>{_h.escape(sv['machine'])} Not sure which one your job needs? <a class="inl" href="mailto:zap@sydneylasercleaning.com.au?subject=Laser%20cleaning%20quote%20(photo%20attached)">Email us a photo</a> and we'll tell you.</p></div>
     </div>
     <div class="blk">
       <span class="kicker">Sydney wide</span>
@@ -330,8 +330,8 @@ for sv in SVC:
       <div class="faq">{faqhtml}</div>
     </div>
     <div class="cta">
-      <div><h2>Get a free quote</h2><p>Text a photo of the job to <a class="inl" href="sms:0432722498">0432 722 498</a> or email <a class="inl" href="mailto:{EMAIL}">{EMAIL}</a></p></div>
-      <div class="btns"><a class="btn btn-p" href="contact.html">Get a free quote</a><a class="btn btn-o" href="tel:0432722498"><i class="ph ph-phone"></i>Call</a></div>
+      <div><h2>Get a free quote</h2><p>Email a photo of the job to <a class="inl" href="mailto:{EMAIL}">{EMAIL}</a> and we'll get back to you with a price.</p></div>
+      <div class="btns"><a class="btn btn-p" href="contact.html">Get a free quote</a><a class="btn btn-o" href="mailto:zap@sydneylasercleaning.com.au?subject=Laser%20cleaning%20quote%20(photo%20attached)"><i class="ph ph-envelope-simple"></i>Email a photo</a></div>
     </div>
     <div class="blk">
       <h2 style="font-size:26px">Other laser cleaning services</h2>
