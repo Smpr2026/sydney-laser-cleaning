@@ -633,3 +633,6 @@ footer .about{color:var(--muted);margin-top:16px;max-width:36ch;font-size:15px}
 .svc .ogrid a i{color:var(--cyan)}
 @media (max-width:760px){.svc .ticks{grid-template-columns:1fr}.svc .ogrid{grid-template-columns:1fr}.svc .cta{flex-direction:column;align-items:flex-start}}
 .phero.svch img{opacity:.55}
+.svc .cta{text-align:left}
+.svc .cta>div:first-child{flex:1 1 380px}
+.svc .cta h2,.svc .cta p{text-align:left;margin-left:0;margin-right:0;max-width:none}
