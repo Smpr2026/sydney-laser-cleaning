@@ -637,3 +637,7 @@ footer .about{color:var(--muted);margin-top:16px;max-width:36ch;font-size:15px}
 .svc .cta>div:first-child{flex:1 1 380px}
 .svc .cta h2,.svc .cta p{text-align:left;margin-left:0;margin-right:0;max-width:none}
 .svc .cta .btns{margin-top:0;justify-content:flex-start}.svc .cta{padding:clamp(28px,4vw,44px)}
+
+/* 1500W section: portrait clip mirrored so the beam lands on the open right side, cropped to the band where the beam works */
+.vfeat.cw .vbg{transform:scaleX(-1);object-position:50% 25%}
+@media (max-width:860px){.vfeat.cw .vbg{object-position:50% 28%}}
