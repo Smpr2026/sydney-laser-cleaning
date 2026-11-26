@@ -62,11 +62,18 @@
     sec.querySelector('.sl-next')?.addEventListener('click', () => sl.scrollBy({ left: step(), behavior: 'smooth' }));
     sec.querySelector('.sl-prev')?.addEventListener('click', () => sl.scrollBy({ left: -step(), behavior: 'smooth' }));
     sl.addEventListener('keydown', e => { if (e.key === 'ArrowRight') sl.scrollBy({ left: step(), behavior: 'smooth' }); if (e.key === 'ArrowLeft') sl.scrollBy({ left: -step(), behavior: 'smooth' }); });
-    let down = false, sx = 0, sl0 = 0;
-    sl.addEventListener('pointerdown', e => { if (e.pointerType !== 'mouse') return; down = true; sx = e.clientX; sl0 = sl.scrollLeft; sl.setPointerCapture(e.pointerId); sl.classList.add('drag'); });
-    sl.addEventListener('pointermove', e => { if (down) sl.scrollLeft = sl0 - (e.clientX - sx); });
+    let down = false, moved = false, sx = 0, sl0 = 0, pid = 0;
+    sl.addEventListener('pointerdown', e => { if (e.pointerType !== 'mouse' || e.button !== 0) return; down = true; moved = false; sx = e.clientX; sl0 = sl.scrollLeft; pid = e.pointerId; });
+    sl.addEventListener('pointermove', e => {
+      if (!down) return;
+      if (!moved && Math.abs(e.clientX - sx) > 6) { moved = true; sl.setPointerCapture(pid); sl.classList.add('drag'); }
+      if (moved) sl.scrollLeft = sl0 - (e.clientX - sx);
+    });
     const up = () => { down = false; sl.classList.remove('drag'); };
     sl.addEventListener('pointerup', up); sl.addEventListener('pointercancel', up);
+    /* a drag should not also open a link */
+    sl.addEventListener('click', e => { if (moved) { e.preventDefault(); e.stopPropagation(); moved = false; } }, true);
+    sl.addEventListener('dragstart', e => e.preventDefault());
   });
   /* respect reduced motion for the hero video */
   if (matchMedia('(prefers-reduced-motion: reduce)').matches) document.querySelectorAll('video[autoplay]').forEach(v => { v.removeAttribute('autoplay'); v.pause(); v.controls = true; });
