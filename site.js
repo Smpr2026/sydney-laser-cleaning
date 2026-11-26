@@ -177,3 +177,41 @@
   let w = innerWidth; addEventListener('resize', () => { if ((innerWidth < 760) !== (w < 760)) { w = innerWidth; draw(); } });
   draw();
 })();
+
+/* before/after drag cards: drag (mouse or finger) or arrow keys move the split; a short sweep shows people it moves */
+(() => {
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.querySelectorAll('.ba').forEach(box => {
+    const inp = box.querySelector('input');
+    let p = 50, anim = 0, dragging = false;
+    const set = v => { p = Math.max(0, Math.min(100, v)); box.style.setProperty('--p', p + '%'); inp.value = Math.round(p); box.classList.toggle('nob', p < 22); box.classList.toggle('noa', p > 78); };
+    const stop = () => { cancelAnimationFrame(anim); anim = 0; };
+    const used = () => { stop(); box.classList.add('used'); };
+    const at = e => { const r = box.getBoundingClientRect(); return (e.clientX - r.left) / r.width * 100; };
+    box.addEventListener('pointerdown', e => { e.stopPropagation(); used(); dragging = true; box.setPointerCapture(e.pointerId); set(at(e)); });
+    box.addEventListener('pointermove', e => { if (dragging) set(at(e)); });
+    const end = () => { dragging = false; };
+    box.addEventListener('pointerup', end); box.addEventListener('pointercancel', end);
+    inp.addEventListener('input', () => { used(); set(+inp.value); });
+    box.addEventListener('keydown', e => { if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') { e.stopPropagation(); } });
+    /* sweep: 50 -> 12 -> 88 -> 50, eased, each time the card comes into view (until someone drags it) */
+    const keys = [50, 12, 88, 50], seg = 900;
+    const ease = t => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+    const sweep = () => {
+      if (reduce || box.classList.contains('used') || anim) return;
+      const t0 = performance.now();
+      const tick = now => {
+        const t = (now - t0) / seg, i = Math.floor(t);
+        if (i >= keys.length - 1) { set(50); anim = 0; return; }
+        set(keys[i] + (keys[i + 1] - keys[i]) * ease(t - i));
+        anim = requestAnimationFrame(tick);
+      };
+      anim = requestAnimationFrame(tick);
+    };
+    let timer;
+    new IntersectionObserver(([e]) => {
+      clearTimeout(timer);
+      if (e.isIntersecting) timer = setTimeout(sweep, 400); else { stop(); set(50); }
+    }, { threshold: .6 }).observe(box);
+  });
+})();
